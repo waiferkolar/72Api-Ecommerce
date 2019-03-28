@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "cars"
+  },
+  {
+    "id": 2,
+    "name": "bikes"
+  },
+  {
+    "id": 3,
+    "name": "computers"
+  },
+  {
+    "id": 4,
+    "name": "drinks"
+  },
+  {
+    "id": 5,
+    "name": "foods"
+  },
+  {
+    "id": 6,
+    "name": "furniture"
+  },
+  {
+    "id": 7,
+    "name": "hotels"
+  },
+  {
+    "id": 8,
+    "name": "phones"
+  },
+  {
+    "id": 9,
+    "name": "shirts"
+  },
+  {
+    "id": 10,
+    "name": "templates"
+  }
+]
