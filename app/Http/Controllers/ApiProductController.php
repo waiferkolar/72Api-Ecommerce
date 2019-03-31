@@ -34,7 +34,6 @@ class ApiProductController extends Controller
         $image = $request->get('image');
         $description = $request->get('description');
 
-
         $product = new Product();
         $product->cat_id = $cat_id;
         $product->name = $name;
@@ -45,7 +44,7 @@ class ApiProductController extends Controller
         $msg = $con == true ? "Product Uploaded Successfully" : "Product Upload Fail!";
         $msg = [
             "con" => $con,
-            "msg" => $msg
+            "msg" => $msg,
         ];
         return response()->json($msg);
     }
@@ -62,9 +61,24 @@ class ApiProductController extends Controller
 
         $file->move($_SERVER['DOCUMENT_ROOT'] . "/uploads", $filename);
 
-
         return response()->json(["name" => $modify_file_name, "size" => $size]);
     }
+    public function previewCart(Request $request)
+    {
+        $items = $request->get("items");
+        $items = rtrim($items, ",");
+        $productAry = explode(",", $items);
 
+        $products = [];
+        foreach ($productAry as $product) {
+            $aay = explode("#", $product);
+            $productId = $aay[0];
+            $productCount = $aay[1];
+            $productFromDB = Product::where('id', $productId)->first();
+            $productFromDB["count"] = $productCount;
+            array_push($products, $productFromDB);
+        }
+        return response()->json($products);
+    }
 
 }

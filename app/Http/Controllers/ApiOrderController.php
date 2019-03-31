@@ -13,14 +13,16 @@ class ApiOrderController extends Controller
     {
         $res = [
             'con' => true,
-            'msg' => 'Success'
+            'msg' => 'Success',
         ];
 
         $con = false;
-        $ary = $request->get('orders');
-        $data = explode(',', $ary);
+        $orders = $request->get('orders');
+        $data = rtrim($orders, ",");
+        $data = explode(',', $data);
         foreach ($data as $dd) {
-            $con = DB::table('products')->where("id", $dd)->exists();
+            $ary = explode("#", $dd);
+            $con = DB::table('products')->where("id", $ary[0])->exists();
         }
         if (!$con) {
             $res["con"] = false;
@@ -29,7 +31,7 @@ class ApiOrderController extends Controller
             $user = $request->user();
             $order = new Order();
             $order->user_id = $user->id;
-            $order->orders = $ary;
+            $order->orders = $orders;
             $order->save();
         }
 
