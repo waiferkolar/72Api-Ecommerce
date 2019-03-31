@@ -59,7 +59,7 @@ class ApiProductController extends Controller
 
         $modify_file_name = uniqid() . "_" . $filename;
 
-        $file->move($_SERVER['DOCUMENT_ROOT'] . "/uploads", $filename);
+        $file->move($_SERVER['DOCUMENT_ROOT'] . "/uploads", $modify_file_name);
 
         return response()->json(["name" => $modify_file_name, "size" => $size]);
     }
